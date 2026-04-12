@@ -132,3 +132,37 @@ WHERE rank = 1;
 | B  | sushi | 2  |
 | C  | ramen | 3  |
 
+### 6. Which item was purchased first by the customer after they became a member?
+
+
+### 9. If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
+
+<br/>
+
+```sql
+WITH customer_points AS (
+  SELECT 
+    sales.customer_id,
+    CASE 
+      WHEN sales.product_id = 1 THEN menu.price * 2 * 10
+      ELSE menu.price * 10
+    END AS points
+  FROM dannys_diner.sales
+  INNER JOIN dannys_diner.menu
+    ON sales.product_id = menu.product_id
+)
+
+SELECT
+  customer_id,
+  SUM(points) AS total_points
+FROM customer_points
+GROUP BY customer_id
+ORDER BY customer_id ASC;
+```
+
+#### Results:
+| customer_id | total_points | 
+| ------------- | ------------- | 
+| A  | 860  | 
+| B | 940  | 
+| C | 360  | 
