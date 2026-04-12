@@ -134,6 +134,73 @@ WHERE rank = 1;
 
 ### 6. Which item was purchased first by the customer after they became a member?
 
+<br/>
+
+```sql
+WITH after_cust_joining AS (
+  SELECT
+    sales.customer_id,
+    sales.product_id,
+    ROW_NUMBER() OVER (
+      PARTITION BY members.customer_id
+      ORDER BY sales.order_date) AS row_num
+  FROM dannys_diner.sales
+  INNER JOIN dannys_diner.members
+    ON sales.customer_id = members.customer_id
+    AND sales.order_date > members.join_date
+)
+
+SELECT
+  customer_id,
+  product_name AS product_after_joining
+FROM after_cust_joining
+INNER JOIN dannys_diner.menu
+  ON after_cust_joining.product_id = menu.product_id
+WHERE row_num = 1
+ORDER BY customer_id ASC;
+```
+
+#### Results:
+| customer_id | product_after_joining | 
+| ------------- | ------------- | 
+| A  | ramen  | 
+| B | sushi  | 
+
+
+### 7. Which item was purchased just before the customer became a member?
+
+<br/>
+
+```sql
+WITH before_cust_joining AS (
+  SELECT
+    sales.customer_id, 
+    sales.product_id,
+    ROW_NUMBER() OVER (
+      PARTITION BY members.customer_id
+      ORDER BY sales.order_date DESC) AS row_num
+  FROM dannys_diner.sales
+  INNER JOIN dannys_diner.members
+    ON sales.customer_id = members.customer_id
+    AND sales.order_date < members.join_date
+)
+
+SELECT
+  customer_id,
+  product_name AS product_before_joining
+FROM before_cust_joining
+INNER JOIN dannys_diner.menu
+  ON before_cust_joining.product_id = menu.product_id
+WHERE row_num = 1
+ORDER BY customer_id ASC;
+```
+
+#### Results:
+| customer_id | product_before_joining | 
+| ------------- | ------------- | 
+| A  | sushi  | 
+| B | sushi  | 
+
 
 ### 9. If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
 
@@ -166,3 +233,4 @@ ORDER BY customer_id ASC;
 | A  | 860  | 
 | B | 940  | 
 | C | 360  | 
+
