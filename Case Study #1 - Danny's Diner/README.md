@@ -1,3 +1,5 @@
+# Case Study #1 - Danny's Diner
+
 
 ### 1. What is the total amount each customer spent at the restaurant?
 
@@ -200,6 +202,28 @@ ORDER BY customer_id ASC;
 | ------------- | ------------- | 
 | A  | sushi  | 
 | B | sushi  | 
+
+### 8. What is the total items and amount spent for each member before they became a member?
+
+```sql
+SELECT
+  sales.customer_id,
+  COUNT(sales.product_id) AS total_items,
+  SUM(menu.price) AS total_amount
+FROM dannys_diner.sales
+INNER JOIN dannys_diner.members
+  ON sales.customer_id = members.customer_id 
+  AND sales.order_date < members.join_date
+INNER JOIN dannys_diner.menu
+  ON sales.product_id = menu.product_id
+GROUP BY sales.customer_id
+ORDER BY sales.customer_id ASC;
+```
+
+| customer_id | total_items | total_amount |
+| ------------- | ------------- | ------------- | 
+| A  | 2 | 25 |
+| B | 3 | 40 |
 
 
 ### 9. If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
