@@ -1,6 +1,16 @@
 # Case Study #1 - Danny's Diner
 
+Danny's diner is the first case study in the 8-week SQL challenge. Please note that all information for this task is from https://8weeksqlchallenge.com/case-study-1/
 
+## Problem Statement
+Danny wants to use the data to answer a few simple questions about his customers, especially about their visiting patterns, how much money they’ve spent and also which menu items are their favourite. He plans on using these insights to help him decide whether he should expand the existing customer loyalty program.
+
+Danny has shared 3 key datasets for this case study: <br/>
+• sales <br/>
+• menu <br/>
+• members <br/>
+ 
+## Business Questions and Results
 ### 1. What is the total amount each customer spent at the restaurant?
 
 <br/>
@@ -258,3 +268,41 @@ ORDER BY customer_id ASC;
 | B | 940  | 
 | C | 360  | 
 
+### 10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?
+
+<br/>
+
+```sql
+WITH jan_points AS(
+  SELECT
+    customer_id, 
+    join_date, 
+    join_date + 6 AS week_after_join, 
+    DATE_TRUNC( 'month', DATE '2021-01-31')
+      + interval '1 month'
+      - interval '1 day' AS end_date
+  FROM dannys_diner.members
+) 
+
+SELECT 
+  sales.customer_id, 
+  SUM(CASE
+    WHEN sales.order_date BETWEEN jan_points.join_date AND jan_points.week_after_join THEN 2 * 10 * menu.price
+    WHEN sales.product_id = 1 THEN 2 * 10 * menu.price
+    ELSE 10 * menu.price END) AS points
+FROM dannys_diner.sales
+INNER JOIN jan_points
+  ON sales.customer_id = jan_points.customer_id
+  AND sales.order_date >= jan_points.join_date
+  AND sales.order_date <= jan_points.end_date
+INNER JOIN dannys_diner.menu
+  ON sales.product_id = menu.product_id
+GROUP BY sales.customer_id 
+ORDER BY sales.customer_id ASC;
+```
+
+#### Results:
+| customer_id | points | 
+| ------------- | ------------- | 
+| A  | 1020  | 
+| B | 320  | 
