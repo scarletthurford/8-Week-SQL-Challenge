@@ -56,6 +56,8 @@ ORDER BY runner_id ASC;
 
 ## 3. Is there any relationship between the number of pizzas and how long the order takes to prepare?
 
+<br/>
+
 ```sql
 WITH prep_time AS (
 SELECT
@@ -85,5 +87,100 @@ ORDER BY number_of_pizzas ASC;
 | 2 | 18 | 
 | 3 | 29 |
 
-## 4. 
+## 4. What was the average distance travelled for each customer?
+
+<br/>
+
+```sql
+SELECT
+  c.customer_id,
+  ROUND(AVG(r.distance::numeric), 1) AS avg_distance_travelled
+ FROM customer_orders_temp as c
+ JOIN runner_orders_temp as r
+  ON c.order_id = r.order_id
+WHERE r.cancellation NOT LIKE '%Cancellation'
+GROUP BY c.customer_id
+ORDER BY c.customer_id ASC;
+```
+
+### Results:
+
+| customer_id | avg_distance_travelled | 
+| ------------- | ------------- | 
+| 101 | 20.0 | 
+| 102 | 16.7 | 
+| 103 | 23.4 |
+| 104 | 10.0 | 
+| 105 | 25.0 | 
+
+## 5. What was the difference between the longest and shortest delivery times for all orders?
+
+<br/>
+
+```sql
+SELECT
+  (MAX(duration::numeric) - MIN(duration::numeric)) AS delivery_time_diff
+FROM runner_orders_temp
+WHERE duration <> ' ';
+```
+
+### Results:
+
+| delivery_time_diff | 
+| ------------- | 
+| 30 |
+
+## 6. What was the average speed for each runner for each delivery and do you notice any trend for these values?
+
+<br/>
+
+```sql
+SELECT
+  order_id,
+  runner_id,
+  distance,
+  duration,
+  ROUND((distance::numeric / duration::numeric) * 60, 1) AS avg_speed
+FROM runner_orders_temp
+WHERE distance <> ' ' AND duration <> ' ';
+```
+
+### Results
+
+| order_id | runner_id | distance | duration | avg_speed |
+| ------------- | ------------- | ------------- | ------------- | ------------- | 
+| 1 | 1 | 20 | 32 | 37.5 | 
+| 2 | 1 | 20 | 27 | 44.4 | 
+| 3 | 1 | 13.4 | 20 | 40.2 | 
+| 4 | 2 | 23.4 | 40 | 35.1 | 
+| 5 | 3 | 10 | 15 | 40.0 | 
+| 7 | 2 | 25 | 25 | 60.0 | 
+| 8 | 2 | 23.4 | 15 | 93.6 |
+| 10 | 1 | 10 | 10 | 60.0 | 
+
+## 7. What is the successful delivery percentage for each runner?
+
+<br/>
+
+```sql  
+SELECT
+  runner_id,
+  ROUND(100 * SUM(
+    CASE WHEN cancellation NOT LIKE '%Cancellation' THEN 1
+      ELSE 0
+      END) / COUNT(*), 0
+  ) AS success_delivery_percent
+FROM runner_orders_temp
+GROUP BY runner_id
+ORDER BY runner_id;
+
+```
+
+### Results:
+
+| runner_id | success_delivery_percent |
+| ------------- | ------------- | 
+| 1 | 100 |
+| 2 | 75 |
+| 3 | 50 |
 
