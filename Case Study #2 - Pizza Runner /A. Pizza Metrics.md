@@ -26,6 +26,8 @@ SELECT
 FROM customer_orders_temp;
 ```
 
+### Results:
+
 | unique_pizza_count | 
 | ------------- | 
 | 10 |
@@ -43,6 +45,9 @@ WHERE cancellation NOT LIKE '%Cancellation'
 GROUP BY runner_id
 ORDER BY runner_id ASC;
 ```
+
+### Results:
+
 | pizza_count | successful_orders | 
 | ------------- | ------------- | 
 | 1 | 4 |
@@ -65,6 +70,9 @@ JOIN runner_orders_temp as r
 WHERE r.cancellation NOT LIKE '%Cancellation'
 GROUP BY c.pizza_id, p.pizza_name;
 ```
+
+### Results:
+
 | pizza_name | pizzas_delivered | 
 | ------------- | ------------- | 
 | Vegetarian | 3 |
@@ -85,6 +93,9 @@ JOIN pizza_names as p
 GROUP BY c.customer_id, p.pizza_name, p.pizza_id
 ORDER BY c.customer_id ASC;
 ```
+
+### Results:
+
 | pizza_name | pizza_name | pizza_count
 | ------------- | ------------- | ------------- | 
 | 101 | Meatlovers | 2 |
@@ -113,6 +124,8 @@ ORDER BY maximum_pizzas DESC
 LIMIT 1;
 ```
 
+### Results:
+
 | order_id | maximum_pizzas | 
 | ------------- | ------------- | 
 | 4 | 3 | 
@@ -140,6 +153,8 @@ SELECT
  ORDER BY c.customer_id;
 ```
 
+### Results:
+
 | customer_id | no_changes | changes |
 | ------------- | ------------- | ------------- | 
 | 101 | 2 | 0 |
@@ -164,6 +179,8 @@ SELECT
   AND c.extras <> ' ';
 ```
 
+### Results:
+
 | pizzas_delivered_ee | 
 | ------------- | 
 | 1 |
@@ -180,6 +197,8 @@ SELECT
  GROUP BY hour
  ORDER BY hour ASC;
 ```
+
+### Results:
 
 | hour | pizzas_ordered | 
 | ------------- | ------------- | 
@@ -212,6 +231,8 @@ GROUP BY day_of_week,
   EXTRACT(DOW FROM order_time)
 ORDER BY EXTRACT(DOW FROM order_time);
 ```
+
+### Results:
 
 | day_of_week | pizzas_ordered | 
 | ------------- | ------------- | 
