@@ -172,4 +172,53 @@ SELECT
 
 <br/>
 
+```sql
+SELECT
+  DATE_PART('hour', order_time) AS hour,
+  COUNT(order_id) as pizzas_ordered
+ FROM customer_orders_temp 
+ GROUP BY hour
+ ORDER BY hour ASC;
+```
+
+| hour | pizzas_ordered | 
+| ------------- | ------------- | 
+| 11 | 1 | 
+| 13 | 3 | 
+| 18 | 3 | 
+| 19 | 1 | 
+| 21 | 3 | 
+| 23 | 3 |
+
+## 10. What was the volume of orders for each day of the week?
+
+<br/>
+
+```sql
+SELECT
+  CASE
+    WHEN EXTRACT(DOW FROM order_time) = 0 THEN 'Sunday'
+    WHEN EXTRACT(DOW FROM order_time) = 1 THEN 'Monday'
+    WHEN EXTRACT(DOW FROM order_time) = 2 THEN 'Tuesday'
+    WHEN EXTRACT(DOW FROM order_time) = 3 THEN 'Wednesday'
+    WHEN EXTRACT(DOW FROM order_time) = 4 THEN 'Thursday'
+    WHEN EXTRACT(DOW FROM order_time) = 5 THEN 'Friday'
+    WHEN EXTRACT(DOW FROM order_time) = 6 THEN 'Saturday'
+    ELSE 'other'
+  END AS day_of_week,
+  COUNT(order_id) AS pizzas_ordered
+FROM customer_orders_temp
+GROUP BY day_of_week,
+  EXTRACT(DOW FROM order_time)
+ORDER BY EXTRACT(DOW FROM order_time);
+```
+
+| day_of_week | pizzas_ordered | 
+| ------------- | ------------- | 
+| Wednesday | 5 | 
+| Thursday | 3 | 
+| Friday | 1 | 
+| Saturday | 5 | 
+ 
+
 
