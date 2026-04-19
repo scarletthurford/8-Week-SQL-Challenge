@@ -100,4 +100,76 @@ ORDER BY c.customer_id ASC;
 
 <br/>
 
+```sql
+SELECT
+  c.order_id,
+  COUNT(c.order_id) AS maximum_pizzas
+FROM customer_orders_temp AS c
+JOIN runner_orders_temp AS r
+  ON c.order_id = r.order_id
+WHERE r.cancellation NOT LIKE '%Cancellation'
+GROUP BY c.order_id
+ORDER BY maximum_pizzas DESC
+LIMIT 1;
+```
+
+| order_id | maximum_pizzas | 
+| ------------- | ------------- | 
+| 4 | 3 | 
+
+## 7. For each customer, how many delivered pizzas had at least 1 change and how many had no changes?
+
+<br/>
+
+```sql
+SELECT
+  c.customer_id,
+  SUM(CASE
+    WHEN c.exclusions = ' ' AND c.extras = ' ' THEN 1
+    ELSE 0 
+    END) AS no_changes,
+  SUM(CASE 
+    WHEN c.exclusions <> ' ' OR c.extras <> ' ' THEN 1
+    ELSE 0
+    END) AS changes
+ FROM customer_orders_temp AS c
+ JOIN runner_orders_temp AS r
+  ON c.order_id = r.order_id
+ WHERE r.cancellation NOT LIKE '%Cancellation'
+ GROUP BY c.customer_id
+ ORDER BY c.customer_id;
+```
+
+| customer_id | no_changes | changes |
+| ------------- | ------------- | ------------- | 
+| 101 | 2 | 0 |
+| 102 | 3 | 0 |
+| 103 | 0 | 3 |
+| 104 | 1 | 2 |
+| 105 | 0 | 1 |
+
+
+## 8. How many pizzas were delivered that had both exclusions and extras?
+
+<br/>
+
+```sql
+SELECT
+  COUNT(c.order_id) as pizzas_delivered_ee
+ FROM customer_orders_temp AS c
+ JOIN runner_orders_temp AS r
+  ON c.order_id = r.order_id
+ WHERE r.cancellation NOT LIKE '%Cancellation'
+  AND c.exclusions <> ' ' 
+  AND c.extras <> ' ';
+```
+
+| pizzas_delivered_ee | 
+| ------------- | 
+| 1 |
+
+## 9. What was the total volume of pizzas ordered for each hour of the day?
+
+<br/>
+
 
