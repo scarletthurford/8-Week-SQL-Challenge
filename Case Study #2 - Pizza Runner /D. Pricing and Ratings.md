@@ -16,3 +16,12 @@ JOIN pizza_names as p
   ON c.pizza_id = p.pizza_id
 GROUP BY p.pizza_name, c.pizza_id;
 ```
+
+### Results:
+
+| pizza_name | money_made_USD | 
+| ------------- | ------------- | 
+| Meatlovers | 120 |
+| Vegetarian | 40 |
+
+## 2. What if there was an additional $1 charge for any pizza extras? Add cheese is $1 extra
