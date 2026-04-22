@@ -34,3 +34,16 @@ WHERE s.customer_id IN (1,2,11,13,15,16,18,19)
 ORDER BY s.customer_id ASC;
 ```
 ### Table:
+
+<br/>
+  <img src="Images/customer_analysis.png" alt="Customer_Analysis" width="50%">
+  <br>
+</p>
+<br/>
+
+Based on the results above, I have selected three customers to focus on and will describe their onboarding journey.
+
+#### Customer 1:
+
+
+
