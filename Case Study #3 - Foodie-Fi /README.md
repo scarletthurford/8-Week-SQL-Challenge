@@ -9,4 +9,27 @@ Danny wanted to create a new streaming service that only had food related conten
 
 Danny created Foodie-Fi with a data driven mindset and wanted to ensure all future investment decisions and new features were decided using data. This case study focuses on using subscription style digital data to answer important business questions.
 
+Danny has shared 2 key datasets for this case study:
+• plans <br\>
+• subscriptions <br\>
 
+## A. Customer Journey
+
+Based off the 8 sample customers provided in the sample from the subscriptions table, write a brief description about each customer’s onboarding journey.
+
+<br\>
+
+I needed to first join the sample table with the plans table.
+
+```sql
+SELECT
+  s.customer_id,
+  p.plan_id, 
+  p.plan_name,  
+  s.start_date
+FROM foodie_fi.plans as p
+JOIN foodie_fi.subscriptions AS s
+  ON p.plan_id = s.plan_id
+WHERE s.customer_id IN (1,2,11,13,15,16,18,19)
+ORDER BY s.customer_id ASC;
+```
