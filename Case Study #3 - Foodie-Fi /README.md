@@ -35,15 +35,61 @@ ORDER BY s.customer_id ASC;
 ```
 ### Table:
 
-<br/>
-  <img src="Images/customer_analysis.png" alt="Customer_Analysis" width="50%">
-  <br>
-</p>
-<br/>
+<img src="Images/customer_analysis.png" alt="Customer_Analysis" width="50%">
 
 Based on the results above, I have selected three customers to focus on and will describe their onboarding journey.
 
 #### Customer 1:
+
+| customer_id | plan_id | plan_name | start_date |
+| ------------- | ------------- | ------------- | ------------- | 
+| 1 | 0 | trial | 2020-08-01 |
+| 1 | 1 | basic monthly | 2020-08-08 |
+
+This customer started their free trial on 2020-08-01. After their trial ended, they joined the basic monthly plan. 
+
+#### Customer 11:
+
+| customer_id | plan_id | plan_name | start_date |
+| ------------- | ------------- | ------------- | ------------- | 
+| 11 | 0 | trial | 2020-11-19 |
+| 11 | 4 | churn | 2020-11-26 |
+
+This customer started their free trial on 2020-11-19. However, after their free trial ended on 2020-11-26, they decided to cancel the plan and not continue with the service, suggesting that they could either not afford the program or they did not enjoy it. 
+
+#### Customer 13:
+
+| customer_id | plan_id | plan_name | start_date |
+| ------------- | ------------- | ------------- | ------------- | 
+| 13 | 0 | trial | 2020-12-15 |
+| 13 | 1 | basic monthly | 2020-12-22 |
+| 13 | 2 | pro monthly | 2021-03-29 |
+
+This customer started their free trial on 2020‑12‑15 and moved to the basic monthly plan once the trial ended. On 2021‑03‑29, they upgraded to the pro monthly plan, suggesting that after three months the basic plan no longer met their needs.
+
+## B. Data Analysis Questions
+
+### 1. How many customers has Foodie-Fi ever had?
+
+<br/>
+
+```sql
+SELECT
+  COUNT(DISTINCT customer_id) as total_customers
+FROM foodie_fi.subscriptions;
+```
+
+#### Results:
+
+| total_customers |
+| ------------- |
+| 1000 |
+
+Foodie_Fi has had 1000 different customers.
+
+## 2. 
+
+
 
 
 
