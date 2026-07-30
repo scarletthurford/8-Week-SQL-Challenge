@@ -16,7 +16,7 @@ Danny has shared 3 key datasets for this task: <br/>
 • `customer_nodes` <br/>
 • `customer_transactions` <br/>
 
-### Contents
+## Contents
 
 - [Business Task](#business-task)
 - **Questions and Solutions**
