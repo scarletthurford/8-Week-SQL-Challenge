@@ -3,19 +3,26 @@
 Foodie-Fi is the first case study in the 8-week SQL challenge. Please note that all information for this task is from:
 https://8weeksqlchallenge.com/case-study-3/
 
-## Problem Statement
+## Business Task
 
-Danny wanted to create a new streaming service that only had food related content - something like Netflix but with only cooking shows! He finds a few smart friends to launch his new startup Foodie-Fi in 2020 and started selling monthly and annual subscriptions, giving their customers unlimited on-demand access to exclusive food videos from around the world!
+Danny wanted to create a new streaming service that only had food-related content - something like Netflix, but with only cooking shows! He finds a few smart friends to launch his new startup, Foodie-Fi, in 2020 and starts selling monthly and annual subscriptions, giving their customers unlimited on-demand access to exclusive food videos from around the world!
 
-Danny created Foodie-Fi with a data driven mindset and wanted to ensure all future investment decisions and new features were decided using data. This case study focuses on using subscription style digital data to answer important business questions.
+Danny created Foodie-Fi with a data-driven mindset and wanted to ensure all future investment decisions and new features were decided using data. This case study focuses on using subscription-style digital data to answer important business questions.
 
-Danny has shared 2 key datasets for this case study: <br/>
-• plans  <br/>
-• subscriptions <br/>
+Danny has shared 2 key datasets for this task: <br/>
+• `plans`  <br/>
+• `subscriptions` <br/>
 
-## A. Customer Journey
+### Contents
 
-Based off the 8 sample customers provided in the sample from the subscriptions table, write a brief description about each customer’s onboarding journey.
+- [Business Task](#business-task)  <br/>
+- **Questions and Solutions**
+  - [Customer Journey](#customer-journey)
+  - [Data Analysis Questions](#data-analysis-questions)
+
+## Customer Journey
+
+Based on the 8 sample customers provided in the sample from the subscriptions table, write a brief description about each customer’s onboarding journey.
 
 I needed to first join the sample table with the plans table to retrieve the plan name that each customer was on.
 
@@ -67,7 +74,7 @@ This customer started their free trial on 2020-11-19. However, after their free 
 
 This customer started their free trial on 2020‑12‑15 and moved to the basic monthly plan once the trial ended. On 2021‑03‑29, they upgraded to the pro monthly plan, suggesting that after three months the basic plan no longer met their needs.
 
-## B. Data Analysis Questions
+## Data Analysis Questions
 
 ### 1. How many customers has Foodie-Fi ever had?
 
