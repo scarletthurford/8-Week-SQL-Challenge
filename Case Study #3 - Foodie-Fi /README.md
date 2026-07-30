@@ -17,10 +17,10 @@ Danny has shared 2 key datasets for this task: <br/>
 
 - [Business Task](#business-task)  <br/>
 - **Questions and Solutions**
-  - [Customer Journey](#customer-journey)
-  - [Data Analysis Questions](#data-analysis-questions)
+  - [Customer Journey](#a-customer-journey)
+  - [Data Analysis Questions](#b-data-analysis-questions)
 
-## Customer Journey
+## A. Customer Journey
 
 Based on the 8 sample customers provided in the sample from the subscriptions table, write a brief description about each customer’s onboarding journey.
 
@@ -74,7 +74,7 @@ This customer started their free trial on 2020-11-19. However, after their free 
 
 This customer started their free trial on 2020‑12‑15 and moved to the basic monthly plan once the trial ended. On 2021‑03‑29, they upgraded to the pro monthly plan, suggesting that after three months the basic plan no longer met their needs.
 
-## Data Analysis Questions
+## B. Data Analysis Questions
 
 ### 1. How many customers has Foodie-Fi ever had?
 
