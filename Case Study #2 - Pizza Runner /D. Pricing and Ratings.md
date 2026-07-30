@@ -67,7 +67,7 @@ FROM extras_charges, pizza_charges;
 
 ## 3. The Pizza Runner team now wants to add an additional ratings system that allows customers to rate their runner, how would you design an additional table for this new dataset - generate a schema for this new table and insert your own data for ratings for each successful customer order between 1 to 5.
 
-<br\>
+</br>
 
 ```sql
 DROP TABLE IF EXISTS ratings_system;
@@ -91,6 +91,9 @@ VALUES
 ```
 
 ### Table:
+
+<img width="1800" height="428" alt="ratings_system" src="https://github.com/user-attachments/assets/0b051e69-94eb-45ca-b9d0-870ff6817fb0" />
+
 
 
 
