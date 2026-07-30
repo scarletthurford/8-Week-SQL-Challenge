@@ -42,7 +42,7 @@ ORDER BY s.customer_id ASC;
 ```
 ### Table:
 
-<img src="Images/customer_analysis.png" alt="Customer_Analysis" width="50%">
+<img width="480" height="380" alt="customer_analysis" src="https://github.com/user-attachments/assets/b2ba663b-e01c-4fa3-b56d-421e371bf153" />
 
 Based on the results above, I have selected three customers to focus on and will describe their onboarding journey.
 
